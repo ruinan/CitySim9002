@@ -17,17 +17,17 @@ public class ValidatorTest {
     public void ifOneArgumentIsProvidedReturnTrue() {
         Assert.assertTrue(new Validator().validateNumberOfArguments(new String[] { "1" }));
     }
-    
+
     @Test
     public void ifOneArgumentIsNotProvidedReturnFalse() {
         Assert.assertFalse(new Validator().validateNumberOfArguments(new String[] { "1", "2" }));
     }
-    
+
     @Test
     public void ifArgumentIsAnIntegerReturnTrue() {
         Assert.assertTrue(new Validator().validateArgumentType(new String[] { "1" }));
     }
-    
+    ///test
     @Test
     public void ifArgumentIsNotAnIntegerReturnFalse() {
         Assert.assertFalse(new Validator().validateArgumentType(new String[] { "test" }));
