@@ -27,23 +27,23 @@ public class location {
     }
    
     public ArrayList&lt;String&gt; randomLocation(String[] locations,Random random){//test
-<span class="nc" id="L30">        int index = 0;</span>
-<span class="nc" id="L31">        int count = locations.length;  </span>
-<span class="nc" id="L32">        ArrayList&lt;String&gt; loc = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L30">        int index = 0;</span>
+<span class="fc" id="L31">        int count = locations.length;  </span>
+<span class="fc" id="L32">        ArrayList&lt;String&gt; loc = new ArrayList&lt;&gt;();</span>
         
-<span class="nc" id="L34">        index = count-1;</span>
-<span class="nc" id="L35">        int f = random.nextInt(index);</span>
-<span class="nc" id="L36">        loc.add(locations[f]);</span>
+<span class="fc" id="L34">        index = count-1;</span>
+<span class="fc" id="L35">        int f = random.nextInt(index);</span>
+<span class="fc" id="L36">        loc.add(locations[f]);</span>
         
-<span class="nc" id="L38">        index = random.nextInt(count);</span>
-<span class="nc" id="L39">        loc.add(locations[index]);</span>
+<span class="fc" id="L38">        index = random.nextInt(count);</span>
+<span class="fc" id="L39">        loc.add(locations[index]);</span>
         
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        while(index != 4){// does not random 'leave' </span>
-<span class="nc" id="L42">            index = random.nextInt(count);</span>
-<span class="nc" id="L43">            loc.add(locations[index]);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        while(index != 4){// does not have 'leave' </span>
+<span class="fc" id="L42">            index = random.nextInt(count);</span>
+<span class="fc" id="L43">            loc.add(locations[index]);</span>
         }
         
-<span class="nc" id="L46">        return loc; </span>
+<span class="fc" id="L46">        return loc; </span>
     }
    
    

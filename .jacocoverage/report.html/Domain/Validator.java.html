@@ -5,29 +5,73 @@
  */
 package Domain;
 
+import java.util.HashSet;
+
 /**
  *
  *
  */
-<span class="fc" id="L12">public class Validator {</span>
+<span class="fc" id="L14">public class Validator {</span>
     public boolean validateArguments(String[] args) {
-<span class="nc bnc" id="L14" title="All 4 branches missed.">        return validateNumberOfArguments(args) &amp;&amp; validateArgumentType(args);</span>
+<span class="nc bnc" id="L16" title="All 4 branches missed.">        return validateNumberOfArguments(args) &amp;&amp; validateArgumentType(args);</span>
     }
 
     public boolean validateNumberOfArguments(String[] args) {
-<span class="fc bfc" id="L18" title="All 2 branches covered.">        return args.length == 1;</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        return args.length == 1;</span>
     }
 
     public boolean validateArgumentType(String[] args) {
         try {
-<span class="fc" id="L23">            Integer.parseInt(args[0]);</span>
-<span class="fc" id="L24">            return true;</span>
-<span class="fc" id="L25">        } catch (Exception e) {</span>
-<span class="fc" id="L26">            return false;</span>
+<span class="fc" id="L25">            Integer.parseInt(args[0]);</span>
+<span class="fc" id="L26">            return true;</span>
+<span class="fc" id="L27">        } catch (Exception e) {</span>
+<span class="fc" id="L28">            return false;</span>
         }
     }
     
-   
+    public boolean validateVisitor(String[] visitors){
+<span class="fc" id="L33">        HashSet&lt;String&gt; vis = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L34">        vis.add(&quot;Student&quot;);</span>
+<span class="fc" id="L35">        vis.add(&quot;Business Person&quot;);</span>
+<span class="fc" id="L36">        vis.add(&quot;Professor&quot;); </span>
+<span class="fc" id="L37">        vis.add(&quot;Blogger&quot;);</span>
+<span class="pc bpc" id="L38" title="2 of 4 branches missed.">        if(visitors == null || visitors.length == 0){</span>
+<span class="nc" id="L39">            return false;</span>
+        }
+        else{
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            for(String v : visitors){</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">                if(!vis.contains(v)){</span>
+                //if(!v.equals(&quot;Student&quot;)){ 
+                    
+<span class="fc" id="L46">                    return false;</span>
+                }
+            }
+<span class="fc" id="L49">            return true;</span>
+        }
+        
+    }
+    
+     public boolean validateLocation(String[] locations){
+<span class="fc" id="L55">        HashSet&lt;String&gt; locs = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L56">        locs.add(&quot;Squirrel Hill&quot;);</span>
+<span class="fc" id="L57">        locs.add(&quot;Downtown&quot;);</span>
+<span class="fc" id="L58">        locs.add(&quot;The Point&quot;); </span>
+<span class="fc" id="L59">        locs.add(&quot;The Cathedral of Learning&quot;);</span>
+<span class="fc" id="L60">        locs.add(&quot;leave&quot;);</span>
+<span class="pc bpc" id="L61" title="2 of 4 branches missed.">        if(locations == null || locations.length == 0){</span>
+<span class="nc" id="L62">            return false;</span>
+        }
+        else{
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            for(String l : locations){  </span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">                if(!locs.contains(l)){</span>
+                 //if(!l.equals(&quot;Downtown&quot;)){   
+<span class="fc" id="L68">                    return false;</span>
+                }
+            }
+<span class="fc" id="L71">            return true;</span>
+        }
+        
+    }
 
     
 }
