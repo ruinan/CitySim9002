@@ -5,6 +5,8 @@
  */
 package Domain;
 
+import java.util.HashSet;
+
 /**
  *
  *
@@ -27,7 +29,49 @@ public class Validator {
         }
     }
     
-   
+    public boolean validateVisitor(String[] visitors){
+        HashSet<String> vis = new HashSet<>();
+        vis.add("Student");
+        vis.add("Business Person");
+        vis.add("Professor"); 
+        vis.add("Blogger");
+        if(visitors == null || visitors.length == 0){
+            return false;
+        }
+        else{
+            for(String v : visitors){
+                if(!vis.contains(v)){
+                //if(!v.equals("Student")){ 
+                    
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+    }
+    
+     public boolean validateLocation(String[] locations){
+        HashSet<String> locs = new HashSet<>();
+        locs.add("Squirrel Hill");
+        locs.add("Downtown");
+        locs.add("The Point"); 
+        locs.add("The Cathedral of Learning");
+        locs.add("leave");
+        if(locations == null || locations.length == 0){
+            return false;
+        }
+        else{
+            for(String l : locations){  
+                if(!locs.contains(l)){
+                 //if(!l.equals("Downtown")){   
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+    }
 
     
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CitySim9002.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CitySim9002&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Program</a> &gt; <span class="el_source">CitySim9002.java</span></div><h1>CitySim9002.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Program;
+import Domain.Validator;
+import java.util.ArrayList;
+import java.util.Stack;
+/**
+ *
+ * @author ruinan
+ */
+<span class="nc" id="L14">public class CitySim9002 {</span>
+    
+    public static void main(String[] args){
+        
+<span class="nc" id="L18">        Validator v= new Validator();</span>
+<span class="nc" id="L19">        String[] locations = {&quot;Squirrel Hill&quot;,&quot;Downtown&quot;,&quot;The Point&quot;,&quot;The Cathedral of Learning&quot;,&quot;leave&quot;};</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        if (v.validateArguments(args)) {</span>
+              
+<span class="nc" id="L22">            System.out.println(args[0]); // the args is not  </span>
+            
+<span class="nc" id="L24">            CitySim9002 cs = new CitySim9002();// instantiate CitySim9002</span>
+            //cs.visitLocations(Integer.parseInt(args[0]));  
+<span class="nc" id="L26">        }</span>
+        else {
+           
+<span class="nc" id="L29">            System.out.println(&quot;Sorry&quot;);</span>
+        }
+    
+<span class="nc" id="L32">    }</span>
+    
+    
+    public void randomLocation(){
+    
+    
+<span class="nc" id="L38">    }</span>
+    
+//    
+//    public visitor getVisitor(){
+//        
+//        //return visitor;
+//    }
+    
+    public void visitLocations(int seed){//test
+//        visitor v = new visitor();
+//        Stack&lt;visitor&gt; visitors;
+//        visitors = v.getAllVisitors();
+//        //System.out.println(visitors.size());
+//      
+//        location l = new location(seed);
+//        
+//        //System.out.println(citiesList.toArray());
+//        
+//        int visitCount = 1;
+//        String result = &quot;&quot;;
+//        while(!visitors.empty()){
+//            visitor visitor  = new visitor();
+//            visitor= visitors.pop();
+//            result += (&quot;Visitor &quot;+visitCount+&quot; is a &quot;+visitor.getType()+&quot;.\n&quot;);
+//            ArrayList&lt;String&gt; citiesList = l.randomLocation();
+//            // test cities list == 0
+//            for(int i = 0;i&lt;citiesList.size()-1;i++){
+//                String city = citiesList.get(i);
+//                result += (&quot;Visitor &quot;+visitCount+&quot; is going to &quot;+city+&quot;!\n&quot;);
+//                
+//                if(visitor.getPreference().get(city)){// need test inputs for Hashmap
+//                   result += (&quot;Visitor &quot;+visitCount+&quot; did like &quot;+city+&quot;.\n&quot;);
+//                }
+//                else{
+//                    result += (&quot;Visitor &quot;+visitCount+&quot; did not like &quot;+city+&quot;.\n&quot;);
+//                }
+//            }
+//            result += (&quot;Visitor &quot;+visitCount+&quot; has left the city.\n***\n&quot;);
+//            visitCount++;
+//        }
+//        System.out.println(result);
+        
+<span class="nc" id="L80">    }</span>
+    
+   
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

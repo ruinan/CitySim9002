@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>visitor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CitySim9002&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Program</a> &gt; <span class="el_source">visitor.java</span></div><h1>visitor.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Program;
+
+import java.util.HashMap;
+import java.util.Stack;
+
+/**
+ *
+ * @author ruinan
+ */
+public class visitor {
+    
+    private String type;
+    private HashMap&lt;String,Boolean&gt; preference;
+    
+<span class="fc" id="L20">    public visitor(){</span>
+<span class="fc" id="L21">    }</span>
+    
+<span class="fc" id="L23">    public visitor(String t,HashMap&lt;String,Boolean&gt; p){</span>
+<span class="fc" id="L24">        this.type = t;</span>
+<span class="fc" id="L25">        this.preference = p;</span>
+<span class="fc" id="L26">    }</span>
+
+    
+    
+    public String getType(){
+<span class="fc" id="L31">        return this.type;</span>
+    }
+    
+    public HashMap&lt;String,Boolean&gt; getPreference(){
+<span class="fc" id="L35">        return this.preference;</span>
+    }
+    
+    
+    public Stack&lt;visitor&gt; createVisitSequence(String[] vis){//test
+<span class="fc" id="L40">        Stack&lt;visitor&gt; visitors = new Stack&lt;&gt;();</span>
+        // = {&quot;Student&quot;,&quot;Business Person&quot;,&quot;Professor&quot;,&quot;Blogger&quot;,&quot;Student&quot;};
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        for(String v:vis){</span>
+<span class="fc" id="L43">            visitor temp = this.generateVisitor(v);</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">            if(temp!= null){</span>
+<span class="fc" id="L45">                visitors.add(temp);</span>
+            }
+            else{
+<span class="nc" id="L48">                System.err.println(v+&quot; does not been added into visitor sequence&quot;);</span>
+            }
+        }
+<span class="fc" id="L51">        return visitors;</span>
+    }
+    
+    public visitor generateVisitor(String type){ 
+<span class="pc bpc" id="L55" title="4 of 18 branches missed.">        switch(type){</span>
+            case &quot;Student&quot;:
+<span class="fc" id="L57">                HashMap&lt;String, Boolean&gt; hashmapStudent = new HashMap&lt;&gt;();//test all the prefereces must be reached in test</span>
+<span class="fc" id="L58">                hashmapStudent.put(&quot;Squirrel Hill&quot;,true);</span>
+<span class="fc" id="L59">                hashmapStudent.put(&quot;Downtown&quot;,true);</span>
+<span class="fc" id="L60">                hashmapStudent.put(&quot;The Point&quot;,true);</span>
+<span class="fc" id="L61">                hashmapStudent.put(&quot;The Cathedral of Learning&quot;,false);  </span>
+               // System.out.println(&quot;map&quot;+hashmap.get(&quot;Downtown&quot;));
+<span class="fc" id="L63">                visitor student = new visitor(type,hashmapStudent);</span>
+<span class="fc" id="L64">                return student;</span>
+            case &quot;Business Person&quot;:
+<span class="fc" id="L66">                HashMap&lt;String, Boolean&gt; hashmapBusinessPerson = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L67">                hashmapBusinessPerson.put(&quot;Squirrel Hill&quot;,true);</span>
+<span class="fc" id="L68">                hashmapBusinessPerson.put(&quot;Downtown&quot;,true);</span>
+<span class="fc" id="L69">                hashmapBusinessPerson.put(&quot;The Point&quot;,false);</span>
+<span class="fc" id="L70">                hashmapBusinessPerson.put(&quot;The Cathedral of Learning&quot;,false);</span>
+<span class="fc" id="L71">                visitor businessPerson  = new visitor(&quot;Business Person&quot;,hashmapBusinessPerson);</span>
+<span class="fc" id="L72">                return businessPerson;</span>
+            case &quot;Professor&quot;:
+<span class="fc" id="L74">                HashMap&lt;String, Boolean&gt; hashmapProfessor = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L75">                hashmapProfessor.put(&quot;Squirrel Hill&quot;,true);</span>
+<span class="fc" id="L76">                hashmapProfessor.put(&quot;Downtown&quot;,true);</span>
+<span class="fc" id="L77">                hashmapProfessor.put(&quot;The Point&quot;,true);</span>
+<span class="fc" id="L78">                hashmapProfessor.put(&quot;The Cathedral of Learning&quot;,true);</span>
+<span class="fc" id="L79">                visitor professor  = new visitor(&quot;Professor&quot;,hashmapProfessor);</span>
+<span class="fc" id="L80">                return professor;</span>
+            case &quot;Blogger&quot;:
+<span class="fc" id="L82">                HashMap&lt;String, Boolean&gt; hashmapBlogger = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L83">                hashmapBlogger.put(&quot;Squirrel Hill&quot;,false);</span>
+<span class="fc" id="L84">                hashmapBlogger.put(&quot;Downtown&quot;,false);</span>
+<span class="fc" id="L85">                hashmapBlogger.put(&quot;The Point&quot;,false);</span>
+<span class="fc" id="L86">                hashmapBlogger.put(&quot;The Cathedral of Learning&quot;,false);</span>
+<span class="fc" id="L87">                visitor blogger  = new visitor(&quot;Blogger&quot;,hashmapBlogger);</span>
+<span class="fc" id="L88">                return blogger;</span>
+            default:
+<span class="fc" id="L90">                return null;</span>
+        }    
+       
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

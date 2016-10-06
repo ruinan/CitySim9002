@@ -15,35 +15,32 @@ import java.util.Random;
 public class location {
     
     private Random r;
-    public location(int s){
-       r = new Random(s); 
-    }
-    private String[] l = {"Squirrel Hill","Downtown","The Point","The Cathedral of Learning","leave"};
    
-    public String getLocation(int index){
-        return this.l[index];
-        //check the index;
+    
+    public location(int seed){
+       this.r = new Random(seed); 
+       
+    }
+    
+    public Random getRandom(){
+        return this.r;
     }
    
-    public ArrayList<String> randomLocation(){
+    public ArrayList<String> randomLocation(String[] locations,Random random){//test
         int index = 0;
-        int count = l.length;
-        
-        ArrayList<String> loc = new ArrayList<>();// stack is fine
+        int count = locations.length;  
+        ArrayList<String> loc = new ArrayList<>();
         
         index = count-1;
-        int f = r.nextInt(index);
-        //System.out.println(l[f]);//test the leave would or would not be reached;
-        loc.add(l[f]);
+        int f = random.nextInt(index);
+        loc.add(locations[f]);
         
+        index = random.nextInt(count);
+        loc.add(locations[index]);
         
-        index = r.nextInt(count);
-        //System.out.println(l[index]);
-        loc.add(l[index]);
-        while(index != 4){
-            index = r.nextInt(count);
-            loc.add(l[index]);
-            //System.out.println(l[index]);
+        while(index != 4){// does not have 'leave' 
+            index = random.nextInt(count);
+            loc.add(locations[index]);
         }
         
         return loc; 

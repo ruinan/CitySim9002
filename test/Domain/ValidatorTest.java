@@ -21,6 +21,7 @@ public class ValidatorTest {
     @Test
     public void ifOneArgumentIsNotProvidedReturnFalse() {
         Assert.assertFalse(new Validator().validateNumberOfArguments(new String[] { "1", "2" }));
+       
     }
 
     @Test
@@ -32,5 +33,24 @@ public class ValidatorTest {
     public void ifArgumentIsNotAnIntegerReturnFalse() {
         Assert.assertFalse(new Validator().validateArgumentType(new String[] { "test" }));
     }
+    
+    
+    @Test
+    public void ifLocationIsNotInArray(){
+        Assert.assertFalse(new Validator().validateLocation(new String[] {"test"}) );
+    }
+    @Test
+    public void ifLocationIsInArray(){
+        Assert.assertTrue(new Validator().validateLocation(new String[] {"Squirrel Hill","Downtown","The Point","The Cathedral of Learning","leave"}) );
+    }
+    @Test
+    public void ifVisitorArrayIsNotInArray(){
+        Assert.assertFalse(new Validator().validateVisitor(new String[] {"test"}));
+    }
+    @Test
+    public void ifVisitoArrayIsInArray(){
+        Assert.assertTrue(new Validator().validateVisitor(new String[] {"Student","Business Person","Professor","Blogger","Student"}) );
+    }
+    
    
 }

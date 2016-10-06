@@ -16,54 +16,62 @@ public class CitySim9002 {
     public static void main(String[] args){
         
         Validator v= new Validator();
-        if (v.validateArguments(args)) {
-            
-            System.out.println(args[0]);  
-            CitySim9002 cs = new CitySim9002();
-            cs.visitLocs(Integer.parseInt(args[0]));  
+        CitySim9002 cs = new CitySim9002();
+        
+        String[] locations = {"Squirrel Hill","Downtown","The Point","The Cathedral of Learning","leave"};
+        String[] visitors = {"Student","Business Person","Professor","Blogger","Student"};
+        if (v.validateArguments(args)) {// validation
+              
+            System.out.println("Welcome to CitySim! Your seed is "+args[0]+".");  
+            location loc = new location(Integer.parseInt(args[0]));
+            System.out.println(cs.visit(visitors,locations,loc));
+           
         }
         else {
            
-            System.out.println("Sorry");
+            System.out.println("Please enter one integer argument, seed");
         }
     
     }
     
-    public void visitLocs(int seed){
-        visitor v = new visitor();
-        Stack<visitor> visitors;
-        visitors = v.getAllVisitors();
-        //System.out.println(visitors.size());
-      
-        location l = new location(seed);
+    
+    public String visit(String[] visitors,String[] locations,location loc){
+        visitor visitor = new visitor();
+        Validator v= new Validator();
         
-        //System.out.println(citiesList.toArray());
-        
-        int visitCount = 1;
         String result = "";
-        while(!visitors.empty()){
-            visitor visitor  = new visitor();
-            visitor= visitors.pop();
-            result += ("Visitor "+visitCount+" is a "+visitor.getType()+".\n");
-            ArrayList<String> citiesList = l.randomLocation();
-            
-            for(int i = 0;i<citiesList.size()-1;i++){
-                String city = citiesList.get(i);
-                result += ("Visitor "+visitCount+" is going to "+city+"!\n");
-                
-                if(visitor.getPreference().get(city)){// need test inputs for Hashmap
-                   result += ("Visitor "+visitCount+" did like "+city+".\n");
-                }
-                else{
-                    result += ("Visitor "+visitCount+" did not like "+city+".\n");
-                }
+        if(v.validateLocation(locations) && v.validateVisitor(visitors)){
+            Stack<visitor> vs = visitor.createVisitSequence(visitors);
+            int visitCount = 1;
+            while(!vs.empty()){
+                result+=this.visitLocations(vs.pop(), locations, loc, visitCount);
+                visitCount++;
             }
-            result += ("Visitor "+visitCount+" has left the city.\n***\n");
-            visitCount++;
+            
         }
-        System.out.println(result);
+        else{
+            result = "The input arraies for visitors or locations has wrong spelling name! ";
+        }
+        
+        return result;
         
     }
     
-   
+    public String visitLocations(visitor v,String[] locations,location loc,int visitCount){
+        String result = ("Visitor "+visitCount+" is a "+v.getType()+".\n");
+        ArrayList<String> citiesList = loc.randomLocation(locations, loc.getRandom());
+        for(int i = 0;i<citiesList.size()-1;i++){
+            String city = citiesList.get(i);
+            result += ("Visitor "+visitCount+" is going to "+city+"!\n");
+                
+            if(v.getPreference().get(city)){// need test inputs for Hashmap
+                result += ("Visitor "+visitCount+" did like "+city+".\n");
+            }
+            else{
+                result += ("Visitor "+visitCount+" did not like "+city+".\n");
+            }
+        }
+        result += ("Visitor "+visitCount+" has left the city.\n***\n");
+        return result;
+    }
 }
