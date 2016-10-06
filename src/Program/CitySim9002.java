@@ -20,11 +20,12 @@ public class CitySim9002 {
         
         String[] locations = {"Squirrel Hill","Downtown","The Point","The Cathedral of Learning","leave"};
         String[] visitors = {"Student","Business Person","Professor","Blogger","Student"};
-        if (v.validateArguments(args)) {// validation
+        // initialize the constain variables
+        if (v.validateArguments(args)) {// The input should be only one characters and the type should be Integer
               
             System.out.println("Welcome to CitySim! Your seed is "+args[0]+".");  
-            location loc = new location(Integer.parseInt(args[0]));
-            System.out.println(cs.visit(visitors,locations,loc));
+            location loc = new location(Integer.parseInt(args[0]));//convert String to Int to regard as seed 
+            System.out.println(cs.visit(visitors,locations,loc));// Use the method to iterate all visitors in visitor sequence.
            
         }
         else {
@@ -40,17 +41,20 @@ public class CitySim9002 {
         Validator v= new Validator();
         
         String result = "";
+        
+        //test locations and visitors validation in order to match the setting of location names and visitor names.
         if(v.validateLocation(locations) && v.validateVisitor(visitors)){
-            Stack<visitor> vs = visitor.createVisitSequence(visitors);
+
+            Stack<visitor> vs = visitor.createVisitSequence(visitors);//generate a sequence which contains 5 visitors.
             int visitCount = 1;
             while(!vs.empty()){
+            // For each visitor, generate random number of location to visit, avoid the situation for no visiting any locations
                 result+=this.visitLocations(vs.pop(), locations, loc, visitCount);
                 visitCount++;
-            }
-            
+            }   
         }
         else{
-            result = "The input arraies for visitors or locations has wrong spelling name! ";
+            result = "The input arraies for visitors or locations has wrong spelling name! ";//warning
         }
         
         return result;
@@ -58,9 +62,11 @@ public class CitySim9002 {
     }
     
     public String visitLocations(visitor v,String[] locations,location loc,int visitCount){
+        
         String result = ("Visitor "+visitCount+" is a "+v.getType()+".\n");
-        ArrayList<String> citiesList = loc.randomLocation(locations, loc.getRandom());
-        for(int i = 0;i<citiesList.size()-1;i++){
+        ArrayList<String> citiesList = loc.randomLocation(locations, loc.getRandom());//list to contains random number of locations for a certain visitor to visit.
+        
+        for(int i = 0;i<citiesList.size()-1;i++){//traversing all array to match preferences
             String city = citiesList.get(i);
             result += ("Visitor "+visitCount+" is going to "+city+"!\n");
                 
@@ -72,6 +78,6 @@ public class CitySim9002 {
             }
         }
         result += ("Visitor "+visitCount+" has left the city.\n***\n");
-        return result;
+        return result;//return result for current visitor.
     }
 }

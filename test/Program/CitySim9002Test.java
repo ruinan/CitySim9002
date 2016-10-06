@@ -27,6 +27,12 @@ public class CitySim9002Test {
     /**
      * Test of visit method, of class CitySim9002.
      */
+    /*
+        test the visit method.
+        it mocks some classes;
+        and stub the inside methods.
+    
+    */
     @Test
     public void testVisit() {
         Validator mockvalidator=  mock(Validator.class);
@@ -43,17 +49,18 @@ public class CitySim9002Test {
         when(mockvisitor.createVisitSequence(visitors)).thenReturn(vs);
         when(cs.visitLocations(mockvisitor, _locations, mockloc,count)).thenReturn("xx");
       
-        assertFalse(new CitySim9002().visit(visitors, locations, loc).equals(""));
+        assertFalse(new CitySim9002().visit(visitors, locations, loc).equals(""));// return value should not be ""
     }
 
     /**
      * Test of visitLocations method, of class CitySim9002.
      */
+    // test the visitlocation method
+    // stub the randomLocation  method
     @Test
     public void testVisitLocations() {
         CitySim9002 cs = new CitySim9002();
         location mockloc = mock(location.class);
-        int visitCount = 1;
         HashMap<String, Boolean> hashmapStudent = new HashMap<>();//test all the prefereces must be reached in test
                 hashmapStudent.put("Squirrel Hill",true);
                 hashmapStudent.put("Downtown",true);
@@ -68,7 +75,7 @@ public class CitySim9002Test {
                
         when(mockloc.randomLocation(locations, loc.getRandom())).thenReturn(citiesList);
         
-        assertTrue(cs.visitLocations(student, locations, loc, 1).length()>0);
+        assertTrue(cs.visitLocations(student, locations, loc, 1).length()>0);//return value should not be ""
        
        
     }

@@ -30,19 +30,15 @@ public class locationTest {
         assertNotNull(l.getRandom());
     }
     
-    
-    
-
     /**
      * Test of randomLocation method, of class location.
      */
     @Test
     public void testRandomLocation() {
        location l = mock(location.class);
-       Random random = mock(Random.class);
        Random r = new Random();
        String[] loc = {"a"};
-       assertNotNull(l.randomLocation(loc, r));
+       assertNotNull(l.randomLocation(loc, r));//return value is not null
     }
     
     

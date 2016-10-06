@@ -35,12 +35,12 @@ public class visitor {
         return this.preference;
     }
     
-    
+    // A stack be used to store the visitors. 
     public Stack<visitor> createVisitSequence(String[] vis){//test
         Stack<visitor> visitors = new Stack<>();
         // = {"Student","Business Person","Professor","Blogger","Student"};
         for(String v:vis){
-            visitor temp = this.generateVisitor(v);
+            visitor temp = this.generateVisitor(v);//Following the input array to generate the visitors set.
             if(temp!= null){
                 visitors.add(temp);
             }
@@ -50,7 +50,7 @@ public class visitor {
         }
         return visitors;
     }
-    
+    //generate a visitor map based on hashmap
     public visitor generateVisitor(String type){ 
         switch(type){
             case "Student":
