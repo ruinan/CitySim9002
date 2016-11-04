@@ -24,7 +24,12 @@ public class visitor {
         this.type = t;
         this.preference = p;
     }
-
+    public void setType(String t){
+        this.type = t;
+    }
+    public void setPreference(HashMap<String,Boolean> p){
+        this.preference = p;
+    }
     
     
     public String getType(){
@@ -36,19 +41,26 @@ public class visitor {
     }
     
     // A stack be used to store the visitors. 
-    public Stack<visitor> createVisitSequence(String[] vis){//test
+    public Stack<visitor> createVisitSequence(String[] vis,visitor vv){//test
         Stack<visitor> visitors = new Stack<>();
         // = {"Student","Business Person","Professor","Blogger","Student"};
-        for(String v:vis){
-            visitor temp = this.generateVisitor(v);//Following the input array to generate the visitors set.
-            if(temp!= null){
-                visitors.add(temp);
+        if(vis != null && vis.length != 0){ 
+            for(String v:vis){
+                visitor temp = vv.generateVisitor(v);//Following the input array to generate the visitors set.
+                System.out.println(temp);
+                if(temp!= null){
+                    visitors.add(temp); 
+                }
+                else{
+                    System.err.println(v+" does not been added into visitor sequence");
+                }
             }
-            else{
-                System.err.println(v+" does not been added into visitor sequence");
-            }
+            return visitors;
         }
-        return visitors;
+        else{
+            return null;
+        }
+        
     }
     //generate a visitor map based on hashmap
     public visitor generateVisitor(String type){ 

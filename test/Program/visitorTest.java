@@ -48,18 +48,15 @@ public class visitorTest {
      */
     @Test
     public void testCreateVisitSequence() {
-        // test the create visit sequence
-        //if successed, the amount of elements in sequence will as same as the input visitors`.
-        System.out.println("createVisitSequence");
-        visitor mockVisitor = mock(visitor.class);
-        visitor instance =new visitor();
-        String[] visitor = {"Student","Business Person","Professor","Blogger"};
-       
-        when(mockVisitor.generateVisitor(any(String.class))).thenReturn(mockVisitor);//stub method
-       
-        assertEquals(instance.createVisitSequence(visitor).size(), 4);
+        String[] s = {"Student"};
+        visitor v = new visitor("test",null);
         
-       
+        visitor mockv = mock(visitor.class);//mock
+        
+        when(mockv.generateVisitor(any(String.class))).thenReturn(v);//stub
+          
+        assertEquals(v.createVisitSequence(s, mockv).size(),1);
+        assertEquals(v.createVisitSequence(s, mockv).firstElement().getType(),"test");
     }
     
     

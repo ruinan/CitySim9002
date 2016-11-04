@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import Program.location;
 
 /**
  *
@@ -35,12 +36,27 @@ public class locationTest {
      */
     @Test
     public void testRandomLocation() {
-       location l = mock(location.class);
-       Random r = new Random();
-       String[] loc = {"a"};
-       assertNotNull(l.randomLocation(loc, r));//return value is not null
+       location  mockLocation = mock(location.class);//mock the location
+       location l = new location();
+       String[] locations = {"test","leave"};
+       
+       //stubs
+       when(mockLocation.randomGenerating(locations.length-1, mockLocation.getRandom(), locations)).thenReturn("test");
+       when(mockLocation.randomGenerating(locations.length, mockLocation.getRandom(), locations)).thenReturn("leave");
+       
+       assertEquals(1,l.randomLocation(locations,mockLocation).size());
+       assertEquals("test",l.randomLocation(locations,mockLocation).get(0));
     }
     
-    
-    
+    @Test
+    public void testGenerating(){
+        location l = new location();
+        String[] locations = {"test","leave"};
+        int count = locations.length;
+        //mock
+        Random mockRandom = mock(Random.class);
+        //stub
+        when(mockRandom.nextInt(count)).thenReturn(0);
+        assertEquals(l.randomGenerating(count, mockRandom, locations),"test");
+    }
 }

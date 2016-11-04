@@ -16,6 +16,8 @@ public class CitySim9002 {
     public static void main(String[] args){
         
         Validator v= new Validator();
+        visitor visitor = new visitor();
+        
         CitySim9002 cs = new CitySim9002();
         
         String[] locations = {"Squirrel Hill","Downtown","The Point","The Cathedral of Learning","leave"};
@@ -25,7 +27,7 @@ public class CitySim9002 {
               
             System.out.println("Welcome to CitySim! Your seed is "+args[0]+".");  
             location loc = new location(Integer.parseInt(args[0]));//convert String to Int to regard as seed 
-            System.out.println(cs.visit(visitors,locations,loc));// Use the method to iterate all visitors in visitor sequence.
+            System.out.println(cs.visit(visitors,locations,loc,visitor,v,cs));// Use the method to iterate all visitors in visitor sequence.
            
         }
         else {
@@ -36,20 +38,19 @@ public class CitySim9002 {
     }
     
     
-    public String visit(String[] visitors,String[] locations,location loc){
-        visitor visitor = new visitor();
-        Validator v= new Validator();
+    public String visit(String[] visitors,String[] locations,location loc,visitor visitor,Validator v,CitySim9002 cs){
+  
         
         String result = "";
         
         //test locations and visitors validation in order to match the setting of location names and visitor names.
         if(v.validateLocation(locations) && v.validateVisitor(visitors)){
 
-            Stack<visitor> vs = visitor.createVisitSequence(visitors);//generate a sequence which contains 5 visitors.
+            Stack<visitor> vs = visitor.createVisitSequence(visitors,visitor);//generate a sequence which contains 5 visitors.
             int visitCount = 1;
             while(!vs.empty()){
             // For each visitor, generate random number of location to visit, avoid the situation for no visiting any locations
-                result+=this.visitLocations(vs.pop(), locations, loc, visitCount);
+                result+=cs.visitLocations(vs.pop(), locations, loc, visitCount);
                 visitCount++;
             }   
         }
@@ -64,20 +65,27 @@ public class CitySim9002 {
     public String visitLocations(visitor v,String[] locations,location loc,int visitCount){
         
         String result = ("Visitor "+visitCount+" is a "+v.getType()+".\n");
-        ArrayList<String> citiesList = loc.randomLocation(locations, loc.getRandom());//list to contains random number of locations for a certain visitor to visit.
-        
-        for(int i = 0;i<citiesList.size()-1;i++){//traversing all array to match preferences
-            String city = citiesList.get(i);
-            result += ("Visitor "+visitCount+" is going to "+city+"!\n");
-                
-            if(v.getPreference().get(city)){// need test inputs for Hashmap
-                result += ("Visitor "+visitCount+" did like "+city+".\n");
+        ArrayList<String> citiesList = loc.randomLocation(locations,loc);//list to contains random number of locations for a certain visitor to visit.
+        //System.out.println(citiesList.toArray());
+        //System.out.println(citiesList.size());
+        if(locations.length>1){
+            
+            for(int i = 0;i<citiesList.size()-1;i++){//traversing all array to match preferences
+                String city = citiesList.get(i);
+                result += ("Visitor "+visitCount+" is going to "+city+"!\n");
+
+                if(v.getPreference().get(city)){// need test inputs for Hashmap
+                    result += ("Visitor "+visitCount+" did like "+city+".\n");
+                }
+                else{
+                    result += ("Visitor "+visitCount+" did not like "+city+".\n");
+                }
             }
-            else{
-                result += ("Visitor "+visitCount+" did not like "+city+".\n");
-            }
+            result += ("Visitor "+visitCount+" has left the city.\n***\n");
         }
-        result += ("Visitor "+visitCount+" has left the city.\n***\n");
+        else{
+            result = ("Cities list is empty!");
+        }
         return result;//return result for current visitor.
     }
 }

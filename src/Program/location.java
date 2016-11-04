@@ -16,6 +16,8 @@ public class location {
     
     private Random r;
    
+    public location(){
+    }
     
     public location(int seed){
        this.r = new Random(seed); 
@@ -31,24 +33,41 @@ public class location {
         The sequence eliminate the possibility of the location could be 'leave cities' at first generating.
     
     */
-    public ArrayList<String> randomLocation(String[] locations,Random random){//test
-        int index = 0;
-        int count = locations.length;  
-        ArrayList<String> loc = new ArrayList<>();//store locs;
+    public ArrayList<String> randomLocation(String[] locations,location l){//test
+        int index;
+        int count;
+        ArrayList<String> loc = new ArrayList<>();
         
-        index = count-1;// To get rid of the leave city option at first generating
-        int f = random.nextInt(index);
-        loc.add(locations[f]);
-        
-        index = random.nextInt(count);// To generate locations randomly includes 'leave city' optionl
-        loc.add(locations[index]);
-        
-        while(index != 4){// index depends on the leaving city element position
-            index = random.nextInt(count);
-            loc.add(locations[index]);
+        if(locations == null || locations.length == 0){
+            return null;
         }
+        else{
+            count = locations.length;  
+        }
+        //store locs;
         
-        return loc; 
+        if(count >0){
+            
+            String first = l.randomGenerating(count-1,l.getRandom(),locations);
+            loc.add(first);
+            //System.out.println(first);
+            String sub = l.randomGenerating(count,l.getRandom(),locations);
+            //System.out.println(sub);
+            while(!sub.equals("leave")){
+                loc.add(sub);
+                sub = l.randomGenerating(count,l.getRandom(),locations);
+                System.out.println(sub);
+            }
+           
+        }
+        return loc;
+       
+    }
+    
+    public String randomGenerating(Integer range, Random r, String[] s){
+        
+        return s[r.nextInt(range)];
+        
     }
    
    
